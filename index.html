@@ -709,17 +709,18 @@
   </div>
   <div class="writeup-grid">
 
-    <!-- EJEMPLO 1 - edita con tus máquinas reales -->
-    <a href="#" class="writeup-card">
-      <div class="card-difficulty diff-easy">Easy</div>
-      <div class="card-platform htb">HackTheBox</div>
-      <div class="card-title">TuMáquina1</div>
-      <div class="card-desc">Explotación de servicio vulnerable, escalada vía SUID binary. Enumeración con nmap + gobuster.</div>
+    <!-- TRUST -->
+    <a href="writeups/dockerlabs/muy-facil/trust.html" class="writeup-card">
+      <div class="card-difficulty diff-easy">Muy Fácil</div>
+      <div class="card-platform docker">DockerLabs</div>
+      <div class="card-title">Trust</div>
+      <div class="card-desc">Gobuster descubre secret.php con usuario expuesto. Hydra obtiene credenciales SSH. Escalada via sudo vim.</div>
       <div class="card-tags">
-        <span class="tag">nmap</span>
-        <span class="tag">suid</span>
+        <span class="tag">gobuster</span>
+        <span class="tag">hydra</span>
+        <span class="tag">sudo</span>
+        <span class="tag">vim</span>
         <span class="tag">privesc</span>
-        <span class="tag">linux</span>
       </div>
     </a>
 
@@ -865,8 +866,7 @@
     document.getElementById('progress-bar').style.width = (scroll / height * 100) + '%';
   });
 
-  // Typing effect on terminal block (optional enhancement)
-  // All cards link will open in new tab if href is set
+  // Cards con href real navegan directamente
   document.querySelectorAll('.writeup-card[href="#"]').forEach(card => {
     card.addEventListener('click', e => e.preventDefault());
   });

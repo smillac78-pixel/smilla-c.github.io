@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio de smilla-c — Estudiante de ciberseguridad en 42 Barcelona. Ethical hacking, pentesting, writeups HTB/DockerLabs/TryHackMe.">
+<meta name="keywords" content="cybersecurity, ethical hacking, 42 barcelona, pentesting, writeups, CTF, kali linux">
+<title>smilla-c | Cybersecurity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00ff88;
+    --green-dim: #00c466;
+    --green-dark: #003d1f;
+    --cyan: #00e5ff;
+    --cyan-dim: #00a8cc;
+    --red: #ff3c3c;
+    --yellow: #ffd000;
+    --bg: #0a0a0a;
+    --bg2: #0f0f0f;
+    --bg3: #141414;
+    --border: #1a2e1a;
+    --text: #b0c4b0;
+    --text-dim: #5a7a5a;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-vt: 'VT323', monospace;
+    --font-ui: 'Rajdhani', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* Scanlines overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,10,10,0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: var(--font-vt);
+    font-size: 1.5rem;
+    color: var(--green);
+    text-decoration: none;
+    letter-spacing: 2px;
+  }
+
+  .nav-logo span { color: var(--cyan); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  nav ul a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--green);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  nav ul a:hover { color: var(--green); }
+  nav ul a:hover::after { transform: scaleX(1); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridShift 20s linear infinite;
+  }
+
+  @keyframes gridShift {
+    from { background-position: 0 0; }
+    to { background-position: 40px 40px; }
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    border: 1px solid var(--cyan-dim);
+    padding: 4px 14px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    animation: blink-border 2s ease-in-out infinite;
+  }
+
+  @keyframes blink-border {
+    0%, 100% { border-color: var(--cyan-dim); }
+    50% { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0,229,255,0.3); }
+  }
+
+  .hero-name {
+    font-family: var(--font-vt);
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(0,255,136,0.4);
+    animation: flicker 8s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 97%, 100% { opacity: 1; }
+    98% { opacity: 0.7; }
+    99% { opacity: 1; }
+    99.5% { opacity: 0.6; }
+  }
+
+  .hero-sub {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-sub span { color: var(--cyan-dim); }
+
+  .terminal-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    position: relative;
+  }
+
+  .terminal-block::before {
+    content: '● ● ●';
+    position: absolute;
+    top: 8px; right: 12px;
+    font-size: 0.5rem;
+    letter-spacing: 4px;
+    color: var(--border);
+  }
+
+  .t-line {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .t-line .prompt { color: var(--green); }
+  .t-line .cmd { color: var(--cyan); }
+  .t-line .key { color: var(--yellow); }
+  .t-line .val { color: var(--text); }
+  .t-line .comment { color: var(--text-dim); }
+
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--green);
+    vertical-align: middle;
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 24px;
+    border: 1px solid;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .btn-primary {
+    color: var(--bg);
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-dim);
+    border-color: var(--green-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,255,136,0.3);
+  }
+
+  .btn-outline {
+    color: var(--cyan);
+    border-color: var(--cyan-dim);
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,229,255,0.08);
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    color: var(--text-dim);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--text-dim);
+    transform: translateY(-2px);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+
+  .section-num {
+    font-family: var(--font-vt);
+    font-size: 1.4rem;
+    color: var(--green-dim);
+  }
+
+  .section-title {
+    font-family: var(--font-ui);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+
+  .section-title span { color: var(--text-dim); }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .about-text {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .about-text p { margin-bottom: 1rem; }
+
+  .about-text strong { color: var(--green); }
+
+  .skills-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+  }
+
+  .skills-box h3 {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 6px 0;
+    font-size: 0.82rem;
+    color: var(--text);
+    border-bottom: 1px solid rgba(26,46,26,0.5);
+  }
+
+  .skill-item:last-child { border-bottom: none; }
+
+  .skill-dot {
+    width: 6px; height: 6px;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+
+  /* WRITEUPS / PROJECTS */
+  .writeup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .writeup-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+
+  .writeup-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--green);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+
+  .writeup-card:hover {
+    border-color: var(--green-dark);
+    background: var(--bg3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  }
+
+  .writeup-card:hover::before { transform: scaleY(1); }
+
+  .card-platform {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-platform.htb { color: #9fef00; }
+  .card-platform.thm { color: #ff4444; }
+  .card-platform.docker { color: #2496ed; }
+  .card-platform.vuln { color: var(--yellow); }
+
+  .card-title {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: var(--bg);
+  }
+
+  .card-difficulty {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+  }
+
+  .diff-easy { color: #00ff88; border: 1px solid #003d1f; }
+  .diff-medium { color: #ffd000; border: 1px solid #3d3000; }
+  .diff-hard { color: #ff3c3c; border: 1px solid #3d0000; }
+
+  .add-card {
+    border: 1px dashed var(--border);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: default;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .add-card span:first-child { font-size: 1.5rem; color: var(--border); }
+
+  /* CERTS */
+  .cert-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+
+  .cert-item:hover { border-color: var(--green-dark); }
+
+  .cert-icon {
+    font-family: var(--font-vt);
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+  }
+
+  .cert-info h4 {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 3px;
+    letter-spacing: 1px;
+  }
+
+  .cert-info p {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .cert-status {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    margin-top: 6px;
+  }
+
+  .status-done { color: var(--green); border: 1px solid var(--green-dark); }
+  .status-progress { color: var(--cyan); border: 1px solid var(--cyan-dim); opacity: 0.7; }
+  .status-next { color: var(--yellow); border: 1px solid #3d3000; }
+  .status-target { color: var(--text-dim); border: 1px solid var(--border); }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .contact-info p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 12px 16px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .contact-link:hover {
+    border-color: var(--green-dark);
+    color: var(--green);
+    transform: translateX(4px);
+  }
+
+  .contact-link .link-icon {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    min-width: 60px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  footer span { color: var(--green-dim); }
+
+  /* SCROLL PROGRESS */
+  #progress-bar {
+    position: fixed;
+    top: 52px; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    z-index: 1001;
+    width: 0%;
+    transition: width 0.1s;
+    box-shadow: 0 0 8px rgba(0,255,136,0.5);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    nav ul { gap: 1rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 3rem; }
+  }
+
+  /* Glitch animation for hero name hover */
+  .hero-name:hover {
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  @keyframes glitch {
+    0% { text-shadow: 0 0 20px rgba(0,255,136,0.4); transform: none; }
+    20% { text-shadow: -2px 0 var(--cyan), 2px 0 var(--red); transform: skewX(-2deg); }
+    40% { text-shadow: 2px 0 var(--cyan), -2px 0 var(--red); transform: skewX(2deg); }
+    60% { text-shadow: 0 0 20px rgba(0,255,136,0.4); transform: none; }
+    80% { text-shadow: -1px 0 var(--cyan), 1px 0 var(--red); }
+    100% { text-shadow: 0 0 20px rgba(0,255,136,0.4); transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">[<span>smilla-c</span>]</a>
+  <ul>
+    <li><a href="#about">about</a></li>
+    <li><a href="#writeups">writeups</a></li>
+    <li><a href="#certs">certs</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">// CYBERSECURITY PORTFOLIO</div>
+    <h1 class="hero-name">smilla-c</h1>
+    <p class="hero-sub">Security Student <span>·</span> Ethical Hacker <span>·</span> CTF Player</p>
+
+    <div class="terminal-block">
+      <div class="t-line"><span class="prompt">smilla@kali</span><span class="comment">:~$</span> <span class="cmd">whoami</span></div>
+      <div class="t-line" style="color: var(--green); margin-bottom:8px;">smilla-c</div>
+      <div class="t-line"><span class="prompt">smilla@kali</span><span class="comment">:~$</span> <span class="cmd">cat</span> profile.json</div>
+      <div class="t-line">{</div>
+      <div class="t-line">&nbsp;&nbsp;<span class="key">"escuela"</span>: <span class="val">"42 Barcelona + IT Academy"</span>,</div>
+      <div class="t-line">&nbsp;&nbsp;<span class="key">"focus"</span>: <span class="val">"Offensive Security"</span>,</div>
+      <div class="t-line">&nbsp;&nbsp;<span class="key">"plataformas"</span>: [<span class="val">"HackTheBox"</span>, <span class="val">"TryHackMe"</span>, <span class="val">"DockerLabs"</span>],</div>
+      <div class="t-line">&nbsp;&nbsp;<span class="key">"objetivo"</span>: <span class="val">"eJPT → OSCP"</span>,</div>
+      <div class="t-line">&nbsp;&nbsp;<span class="key">"ubicacion"</span>: <span class="val">"Barcelona 🇪🇸"</span></div>
+      <div class="t-line">}</div>
+      <div class="t-line"><span class="prompt">smilla@kali</span><span class="comment">:~$</span> <span class="cursor"></span></div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#writeups" class="btn btn-primary">Ver Writeups</a>
+      <a href="#about" class="btn btn-outline">Sobre mí</a>
+      <a href="https://github.com/smilla-c" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">// About <span>me</span></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Soy <strong>smilla-c</strong>, estudiante de ciberseguridad en <strong>42 Barcelona</strong> e IT Academy Barcelona Activa, con foco en seguridad ofensiva y hacking ético.</p>
+      <p>Me especializo en pentesting de máquinas Linux/Windows, escalada de privilegios, enumeración y explotación de servicios. Actualmente trabajando con <strong>Kali Linux</strong>, herramientas del framework de Metasploit, Burp Suite y metodologías OSCP-style.</p>
+      <p>Paralelamente, estudio redes con <strong>Cisco NetAcad</strong> (CCNA track) y practico en OverTheWire Bandit y CTFs. El objetivo: conseguir empleo en ciberseguridad en España.</p>
+    </div>
+    <div class="skills-box">
+      <h3>// Stack técnico</h3>
+      <div class="skill-item"><div class="skill-dot"></div>Pentesting — Kali, Metasploit, Burp Suite</div>
+      <div class="skill-item"><div class="skill-dot"></div>Redes — TCP/IP, VLAN, Routing, Cisco</div>
+      <div class="skill-item"><div class="skill-dot"></div>Linux — escalada de privilegios, hardening</div>
+      <div class="skill-item"><div class="skill-dot"></div>CTF — HackTheBox, TryHackMe, DockerLabs</div>
+      <div class="skill-item"><div class="skill-dot"></div>C programming — 42 School curriculum</div>
+      <div class="skill-item"><div class="skill-dot"></div>Python — scripting, automatización</div>
+      <div class="skill-item"><div class="skill-dot"></div>OSINT — reconocimiento pasivo/activo</div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITEUPS -->
+<section id="writeups">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">// Writeups <span>& labs</span></h2>
+  </div>
+  <div class="writeup-grid">
+
+    <!-- EJEMPLO 1 - edita con tus máquinas reales -->
+    <a href="#" class="writeup-card">
+      <div class="card-difficulty diff-easy">Easy</div>
+      <div class="card-platform htb">HackTheBox</div>
+      <div class="card-title">TuMáquina1</div>
+      <div class="card-desc">Explotación de servicio vulnerable, escalada vía SUID binary. Enumeración con nmap + gobuster.</div>
+      <div class="card-tags">
+        <span class="tag">nmap</span>
+        <span class="tag">suid</span>
+        <span class="tag">privesc</span>
+        <span class="tag">linux</span>
+      </div>
+    </a>
+
+    <!-- EJEMPLO 2 -->
+    <a href="#" class="writeup-card">
+      <div class="card-difficulty diff-medium">Medium</div>
+      <div class="card-platform thm">TryHackMe</div>
+      <div class="card-title">TuMáquina2</div>
+      <div class="card-desc">Reverse shell via LFI, escalada de privilegios mediante cronjob malicioso. Buffer overflow básico.</div>
+      <div class="card-tags">
+        <span class="tag">lfi</span>
+        <span class="tag">cronjob</span>
+        <span class="tag">web</span>
+        <span class="tag">revshell</span>
+      </div>
+    </a>
+
+    <!-- EJEMPLO 3 -->
+    <a href="#" class="writeup-card">
+      <div class="card-difficulty diff-hard">Hard</div>
+      <div class="card-platform docker">DockerLabs</div>
+      <div class="card-title">TuMáquina3</div>
+      <div class="card-desc">Pivoting en red interna, explotación de servicio SMB y escalada via sudo misconfiguration.</div>
+      <div class="card-tags">
+        <span class="tag">smb</span>
+        <span class="tag">pivoting</span>
+        <span class="tag">sudo</span>
+        <span class="tag">windows</span>
+      </div>
+    </a>
+
+    <!-- PLACEHOLDER -->
+    <div class="add-card">
+      <span>[ + ]</span>
+      <span>// próximo writeup</span>
+      <span style="font-size:0.65rem; color: var(--text-dim);">en progreso...</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">// Certs <span>& training</span></h2>
+  </div>
+  <div class="cert-list">
+
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--green);">🎓</div>
+      <div class="cert-info">
+        <h4>42 Barcelona</h4>
+        <p>Software Engineering — C programming, algoritmos, proyectos colaborativos</p>
+        <span class="cert-status status-progress">● En curso</span>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--cyan);">🌐</div>
+      <div class="cert-info">
+        <h4>Cisco NetAcad</h4>
+        <p>CCNA track — Redes, routing, switching, ciberseguridad</p>
+        <span class="cert-status status-progress">● En curso</span>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--yellow);">🔐</div>
+      <div class="cert-info">
+        <h4>eJPT</h4>
+        <p>eLearnSecurity Junior Penetration Tester</p>
+        <span class="cert-status status-next">○ Próximo objetivo</span>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--red);">⚡</div>
+      <div class="cert-info">
+        <h4>CompTIA Security+</h4>
+        <p>Certificación base de ciberseguridad internacional</p>
+        <span class="cert-status status-target">◌ Roadmap</span>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--red);">💀</div>
+      <div class="cert-info">
+        <h4>OSCP</h4>
+        <p>Offensive Security Certified Professional</p>
+        <span class="cert-status status-target">◌ Objetivo final</span>
+      </div>
+    </div>
+
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--text-dim);">🐱</div>
+      <div class="cert-info">
+        <h4>OverTheWire Bandit</h4>
+        <p>CTF wargame — Linux fundamentals, escalada, comandos avanzados</p>
+        <span class="cert-status status-progress">● En progreso</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">// Contact <span>& links</span></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>¿Quieres colaborar en un CTF, tienes algún proyecto de seguridad, o simplemente conectar con alguien de la comunidad infosec?</p>
+      <p>Siempre abierto/a a nuevas conexiones en el mundo de la ciberseguridad.</p>
+    </div>
+    <div class="contact-links">
+      <a href="https://github.com/smilla-c" target="_blank" class="contact-link">
+        <span class="link-icon">GitHub</span>
+        <span>github.com/smilla-c</span>
+      </a>
+      <a href="https://www.hackthebox.com/profile/smilla-c" target="_blank" class="contact-link">
+        <span class="link-icon">HTB</span>
+        <span>HackTheBox profile</span>
+      </a>
+      <a href="https://tryhackme.com/p/smilla-c" target="_blank" class="contact-link">
+        <span class="link-icon">THM</span>
+        <span>TryHackMe profile</span>
+      </a>
+      <a href="https://www.linkedin.com/in/smilla-c" target="_blank" class="contact-link">
+        <span class="link-icon">LinkedIn</span>
+        <span>linkedin.com/in/smilla-c</span>
+      </a>
+      <a href="mailto:tu@email.com" class="contact-link">
+        <span class="link-icon">Email</span>
+        <span>tu@email.com</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>smilla-c</span> — Todos los derechos reservados &nbsp;·&nbsp; Built with <span>♥</span> & kali linux</p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scroll = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress-bar').style.width = (scroll / height * 100) + '%';
+  });
+
+  // Typing effect on terminal block (optional enhancement)
+  // All cards link will open in new tab if href is set
+  document.querySelectorAll('.writeup-card[href="#"]').forEach(card => {
+    card.addEventListener('click', e => e.preventDefault());
+  });
+</script>
+</body>
+</html>

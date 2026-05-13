@@ -111,7 +111,7 @@
   footer span { color:var(--green-dim); }
   footer a { color:var(--text-dim); text-decoration:none; }
   footer a:hover { color:var(--green); }
-  @media(max-width:768px) { .page-wrapper { grid-template-columns:1fr; } .sidebar { position:static; height:auto; border-right:none; border-bottom:1px solid var(--border); } main { padding:1.5rem; } .creds { grid-template-columns:1fr; } .nav-bc { display:none; } }
+  @media(max-width:768px) { .page-wrapper { grid-template-columns:1fr; } .sidebar { position:static; height:auto; border-right:none; border-bottom:1px solid var(--border); } main { padding:1.5rem; } .creds { grid-template-columns:1fr; } .nav-bc { display:none; } nav { padding:0 1rem; } .nav-logo { font-size:1.1rem; letter-spacing:1px; white-space:nowrap; } }
 </style>
 </head>
 <body>
@@ -523,7 +523,7 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(a => a.classList.remove('active'));
-        const active = document.querySelector(\`.nav-links a[href="#${entry.target.id}"]\`);
+        const active = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
         if (active) active.classList.add('active');
       }
     });

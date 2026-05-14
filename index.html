@@ -459,9 +459,9 @@
     padding: 3px 8px;
   }
 
-  .diff-easy { color: #00ff88; border: 1px solid #003d1f; }
-  .diff-medium { color: #ffd000; border: 1px solid #3d3000; }
-  .diff-hard { color: #ff3c3c; border: 1px solid #3d0000; }
+  .diff-easy { color: #00e5ff; border: 1px solid #004d5a; }
+  .diff-medium { color: #ffb300; border: 1px solid #4d3000; }
+  .diff-hard { color: #ff1744; border: 1px solid #4d0010; }
 
   .add-card {
     border: 1px dashed var(--border);
@@ -1012,6 +1012,21 @@
         <span class="tag">lateral movement</span>
         <span class="tag">sudo</span>
         <span class="tag">ruby</span>
+        <span class="tag">privesc</span>
+      </div>
+    </a>
+
+    <!-- INJECTION -->
+    <a href="writeups/dockerlabs/facil/injection.html" class="writeup-card">
+      <div class="card-difficulty diff-medium">Fácil</div>
+      <div class="card-platform docker">DockerLabs</div>
+      <div class="card-title">Injection</div>
+      <div class="card-desc">SQLi bypass en login PHP expone credenciales. Acceso SSH. Escalada via binario env con SUID.</div>
+      <div class="card-tags">
+        <span class="tag">sqli</span>
+        <span class="tag">gobuster</span>
+        <span class="tag">suid</span>
+        <span class="tag">env</span>
         <span class="tag">privesc</span>
       </div>
     </a>

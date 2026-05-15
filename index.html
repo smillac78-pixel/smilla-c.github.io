@@ -617,27 +617,30 @@
   .badge-card {
     background: var(--bg3);
     border: 1px solid var(--border);
-    padding: 1rem;
+    padding: 1rem 0.75rem;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    transition: border-color 0.2s;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    transition: all 0.2s;
   }
 
-  .badge-card:hover { border-color: var(--cyan-dim); }
+  .badge-card:hover { border-color: var(--cyan-dim); transform: translateY(-2px); }
   .badge-card.coming { border-style: dashed; opacity: 0.4; }
 
-  .badge-dot {
-    width: 8px; height: 8px;
-    background: var(--cyan);
-    margin-bottom: 0.25rem;
-    flex-shrink: 0;
+  .badge-icon {
+    width: 54px; height: 54px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.1rem;
   }
-  .badge-card.coming .badge-dot { background: var(--text-dim); }
 
   .badge-name {
     font-family: var(--font-ui);
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--text);
     letter-spacing: 0.5px;
@@ -645,7 +648,7 @@
   }
 
   .badge-date {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--text-dim);
     letter-spacing: 1px;
   }
@@ -935,7 +938,7 @@
       <div class="t-line">{</div>
       <div class="t-line">&nbsp;&nbsp;<span class="key">"escuela"</span>: <span class="val">"IT Academy + 42 Barcelona"</span>,</div>
       <div class="t-line">&nbsp;&nbsp;<span class="key">"focus"</span>: <span class="val">"Offensive Security"</span>,</div>
-      <div class="t-line">&nbsp;&nbsp;<span class="key">"certificados"</span>: [<span class="val">"CCST IT Support Cisco"</span>],</div>
+      <div class="t-line">&nbsp;&nbsp;<span class="key">"certificados"</span>: [<span class="val">"CCST IT Support"</span>, <span class="val">"CCST Networking"</span>],</div>
       <div class="t-line">&nbsp;&nbsp;<span class="key">"objetivo"</span>: <span class="val">"Analista Junior Cybersecurity"</span>,</div>
       <div class="t-line">&nbsp;&nbsp;<span class="key">"ubicacion"</span>: <span class="val">"Barcelona 🇪🇸"</span></div>
       <div class="t-line">}</div>
@@ -961,19 +964,19 @@
   </div>
   <div class="about-grid">
     <div class="about-text">
-      <p>Soy <strong>smilla-c</strong>, estudiante de ciberseguridad en <strong>42 Barcelona</strong> e IT Academy Barcelona Activa, con foco en seguridad ofensiva y hacking ético.</p>
-      <p>Cuento con <strong>18 años de experiencia</strong> trabajando en una ISP en el departamento de <strong>I+M</strong>, lo que me ha dado una base sólida en infraestructuras de red, cableado, configuración de equipos y resolución de incidencias en campo. Esa experiencia real es la que ahora oriento hacia la ciberseguridad.</p>
-      <p>Me especializo en pentesting de máquinas Linux/Windows, escalada de privilegios, enumeración y explotación de servicios. Actualmente trabajando con <strong>Kali Linux</strong>, Metasploit, Burp Suite y metodologías OSCP-style. El objetivo: conseguir empleo en ciberseguridad en España.</p>
+      <p>Técnico de telecomunicaciones y redes con <strong>18 años de experiencia</strong> en entornos ISP, especializado en resolución de incidencias, conectividad y soporte sobre infraestructuras <strong>FTTH</strong> para clientes residenciales y corporativos.</p>
+      <p>Actualmente orientando mi perfil hacia la <strong>ciberseguridad</strong> y el análisis ofensivo, combinando experiencia real en redes con formación técnica en IT Support y Networking. Trabajo habitualmente con entornos Linux, <strong>Kali Linux</strong> y laboratorios prácticos orientados a pentesting y enumeración de sistemas.</p>
+      <p>Desarrollando conocimientos en reconocimiento, análisis y explotación de servicios mediante herramientas como <strong>Nmap</strong>, <strong>Wireshark</strong>, <strong>Gobuster</strong> o <strong>Hydra</strong>, además de entornos virtualizados y laboratorios propios.</p>
+      <p>Certificaciones <strong>CCST IT Support</strong> y <strong>CCST Networking</strong> de Cisco Networking Academy, actualmente cursando formación como <strong>Analista Junior en Ciberseguridad</strong> en Barcelona Activa.</p>
     </div>
     <div class="skills-box">
       <h3>// Stack técnico</h3>
-      <div class="skill-item"><div class="skill-dot"></div>18 años — ISP, I+M</div>
-      <div class="skill-item"><div class="skill-dot"></div>Pentesting — Kali, Metasploit, Burp Suite</div>
-      <div class="skill-item"><div class="skill-dot"></div>Redes — TCP/IP, VLAN, Routing, Cisco</div>
-      <div class="skill-item"><div class="skill-dot"></div>Linux — escalada de privilegios, hardening</div>
-      <div class="skill-item"><div class="skill-dot"></div>CTF — HackTheBox, TryHackMe, DockerLabs</div>
-      <div class="skill-item"><div class="skill-dot"></div>C programming — 42 School curriculum</div>
-      <div class="skill-item"><div class="skill-dot"></div>OSINT — reconocimiento pasivo/activo</div>
+      <div class="skill-item"><div class="skill-dot"></div>Telecom & ISP — 18 years in installation, maintenance and connectivity</div>
+      <div class="skill-item"><div class="skill-dot"></div>Networking — TCP/IP, LAN/WAN, routing fundamentals, Cisco</div>
+      <div class="skill-item"><div class="skill-dot"></div>Cybersecurity Labs — Kali Linux, Nmap, Wireshark, Gobuster, Hydra</div>
+      <div class="skill-item"><div class="skill-dot"></div>Linux — administration, troubleshooting, virtualization and lab environments</div>
+      <div class="skill-item"><div class="skill-dot"></div>Pentesting Labs — Hack The Box, TryHackMe, DockerLabs</div>
+      <div class="skill-item"><div class="skill-dot"></div>Programming & Scripting — C, Python and basic automation scripts</div>
     </div>
   </div>
 </section>
@@ -1058,21 +1061,21 @@
       </div>
     </div>
 
+    <div class="cert-item">
+      <div class="cert-icon" style="color: var(--cyan);">🏅</div>
+      <div class="cert-info">
+        <h4>CCST Networking</h4>
+        <p>Cisco Certified Support Technician Networking — Certificación oficial Cisco</p>
+        <span class="cert-status status-done">✔ Completado</span>
+      </div>
+    </div>
+
     <div class="cert-item clickable" onclick="document.getElementById('badges-overlay').classList.add('open')">
       <div class="cert-icon" style="color: var(--cyan);">🌐</div>
       <div class="cert-info">
         <h4>Cisco NetAcad — 11 insignias</h4>
         <p>Networking · IT Support · Cybersecurity · y más</p>
         <span class="cert-status status-progress">● Ver insignias →</span>
-      </div>
-    </div>
-
-    <div class="cert-item">
-      <div class="cert-icon" style="color: var(--green);">🎓</div>
-      <div class="cert-info">
-        <h4>42 Barcelona</h4>
-        <p>Software Engineering — C programming, algoritmos, proyectos colaborativos</p>
-        <span class="cert-status status-progress">● En curso</span>
       </div>
     </div>
 
@@ -1127,62 +1130,154 @@
     </div>
     <div class="badges-grid">
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Networking Basics</div>
         <div class="badge-date">25 mar 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Networking Devices and Initial Configuration</div>
         <div class="badge-date">14 abr 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Network Addressing and Basic Troubleshooting</div>
         <div class="badge-date">21 abr 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Network Support and Security</div>
         <div class="badge-date">27 abr 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Network Technician Career Path</div>
         <div class="badge-date">29 abr 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">IT Support Specialist Career Path</div>
         <div class="badge-date">16 mar 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">IT Customer Support Basics</div>
         <div class="badge-date">19 feb 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Hardware and Upgrade Support</div>
         <div class="badge-date">12 mar 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Operating Systems Support</div>
         <div class="badge-date">25 feb 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Security and Connectivity Support</div>
         <div class="badge-date">9 mar 2026</div>
       </div>
       <div class="badge-card">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:linear-gradient(135deg,#003087,#0064a4)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="rgba(255,255,255,0.1)"/>
+            <path d="M8 22 Q12 14 18 18 Q24 22 28 14" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 18 Q12 10 18 14 Q24 18 28 10" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="18" cy="28" r="2" fill="#00d4ff"/>
+            <text x="18" y="9" font-family="monospace" font-size="6" fill="white" text-anchor="middle" font-weight="bold">CISCO</text>
+          </svg>
+        </div>
         <div class="badge-name">Introduction to Cybersecurity</div>
         <div class="badge-date">3 may 2026</div>
       </div>
       <div class="badge-card coming">
-        <div class="badge-dot"></div>
+        <div class="badge-icon" style="background:var(--bg2);border:1px dashed var(--border)">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="18" y="23" font-family="monospace" font-size="18" fill="var(--text-dim)" text-anchor="middle">+</text>
+          </svg>
+        </div>
         <div class="badge-name">Próxima insignia...</div>
         <div class="badge-date">// en progreso</div>
       </div>
